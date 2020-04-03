@@ -4,20 +4,20 @@ const links = [
     url: "https://github.com/michelaap",
   },
   {
-    label: "Twitter",
-    url: "https://github.com/michelaap",
+    label: "Linkedin",
+    url: "https://www.linkedin.com/in/michelaugustoap/",
   },
   {
     label: "Instagram",
-    url: "https://github.com/michelaap",
+    url: "https://www.instagram.com/michell_pereira/",
   },
   {
     label: "Youtube",
-    url: "https://github.com/michelaap",
+    url: "https://www.youtube.com/channel/UCq8of4IhlZuS9Cp3awxue1w",
   },
   {
     label: "Facebook",
-    url: "https://github.com/michelaap",
+    url: "https://www.facebook.com/michel.pereira.5872",
   },
 ]
 

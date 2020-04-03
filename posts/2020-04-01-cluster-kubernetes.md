@@ -28,8 +28,8 @@ sudo usermod -aG docker $USER
 
 # Kubernetes
 
-kubelet, kubeadm e kubectl precisam se conversar, portanto atente-se as versões
-verifique sempre a documentação
+kubelet, kubeadm e kubectl precisam se conversar, portanto atente-se para as versões.
+Verifique sempre a documentação!
 
 ```sh
 sudo su
@@ -59,7 +59,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # Configurações Adicionais
 
---- por default o nó master não aceita pods
+Por default o nó master não aceita pods, porém iremos modificar o acesso para que aceite os pods.
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.12.0/Documentation/kube-flannel.yml

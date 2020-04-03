@@ -9,7 +9,6 @@ const postQuery = `{
         frontmatter {
           title
           category
-          background
           date_timestamp: date
           date(locale: "pt-br", formatString: "DD [de] MMMM [de] YYYY")
           description
@@ -20,7 +19,7 @@ const postQuery = `{
   }
 }`
 
-const flatten = arr =>
+const flatten = (arr) =>
   arr.map(({ node: { frontmatter, ...rest } }) => ({
     ...frontmatter,
     date_timestamp: parseInt(
