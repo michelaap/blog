@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import media from "styled-media-query"
 
 export const AboutWrapper = styled.section`
   color: var(--texts);
