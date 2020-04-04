@@ -2,7 +2,7 @@ backend:
   name: github
   repo: michelaap/blog
   branch: master
-  site_domain: https://devinvest.netlify.com/
+  site_domain: https://devinvest.netlify.com
 
 publish_mode: editorial_workflow
 media_folder: "static/assets/img"

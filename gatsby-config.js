@@ -11,8 +11,10 @@ module.exports = {
     siteUrl: "https://devinvest.netlify.com/",
   },
   plugins: [
+    `gatsby-plugin-netlify-cms`,
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-transition-link`,
-    "gatsby-plugin-styled-components",
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     // needs to be the first to work with gatsby-remark-images
     {
@@ -86,7 +88,5 @@ module.exports = {
     },
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-offline`,
-    `gatsby-plugin-netlify-cms`,
-    `gatsby-plugin-netlify`,
   ],
 }
