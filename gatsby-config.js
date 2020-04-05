@@ -12,7 +12,6 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-netlify-cms`,
-    `gatsby-plugin-netlify`,
     `gatsby-plugin-transition-link`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
