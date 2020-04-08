@@ -1,6 +1,6 @@
 ---
 title: Cluster Kubernetes
-description: "Criando um cluster Kubernetes para aplicações escaláveis"
+description: Criando um cluster Kubernetes para aplicações escaláveis
 date: "2020-04-01 23:30:23"
 category: dev
 background: "#ffe358"
