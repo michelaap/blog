@@ -4,16 +4,16 @@ description: "Criando um cluster Kubernetes para aplicações escaláveis"
 date: "2020-04-01 23:30:23"
 category: dev
 background: "#ffe358"
-image: /assets/img
+image: /assets/img/k8s.png
 ---
 
-# Linux
+## Linux
 
 ```sh
 sudo swapoff -a
 ```
 
-# Docker
+## Docker
 
 ```sh
 sudo apt-get update
@@ -26,7 +26,7 @@ sudo apt-get install -y docker-ce
 sudo usermod -aG docker $USER
 ```
 
-# Kubernetes
+## Kubernetes
 
 kubelet, kubeadm e kubectl precisam se conversar, portanto atente-se para as versões.
 Verifique sempre a documentação!
@@ -43,13 +43,13 @@ apt-mark hold kubelet kubeadm kubectl
 exit
 ```
 
-# Iniciando o Cluster
+## Iniciando o Cluster
 
 ```sh
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 ```
 
-# Configurando o Client (Kubectl)
+## Configurando o Client (Kubectl)
 
 ```sh
 mkdir -p $HOME/.kube
@@ -57,7 +57,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-# Configurações Adicionais
+## Configurações Adicionais
 
 Por default o nó master não aceita pods, porém iremos modificar o acesso para que aceite os pods.
 
@@ -66,19 +66,19 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.12.0/Docume
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
-# Dashboard
+## Dashboard
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc7/aio/deploy/recommended.yaml
 ```
 
-# Expondo o Dashboard
+## Expondo o Dashboard
 
 ```sh
 kubectl expose deployment kubernetes-dashboard --name=kubernetes-dashboard-nodeport --port=443 --target-port=8443 --type=NodePort -n kubernetes-dashboard
 ```
 
-# Criando acesso ao Kubernetes
+## Criando acesso ao Kubernetes
 
 ```sh
 kubectl create serviceaccount kubeadmin -n kube-system
@@ -89,7 +89,7 @@ kubectl get secret <TOKENS> -n kube-system -o yaml
 echo `echo <TOKEN> | base64 --decode`
 ```
 
-# Namespaces
+## Namespaces
 
 ```sh
 vim namespaces.yaml
@@ -117,7 +117,7 @@ metadata:
 kubectl apply -f namespaces.yaml
 ```
 
-# Config Map
+## Config Map
 
 ```sh
 vim configmap.yaml
@@ -158,7 +158,7 @@ kubectl apply -f configmap.yaml
       key: NODE_ENV
 ```
 
-# Secret
+## Secret
 
 ```sh
 vim secret.yaml
@@ -191,7 +191,7 @@ data:
 kubectl apply -f secret.yaml
 ```
 
-# Helm
+## Helm
 
 Deploy, rollback, históricos e status
 
@@ -201,7 +201,7 @@ chmod 700 get_helm.sh
 ./get_helm.sh
 ```
 
-# Inicializando o Repositorio
+## Inicializando o Repositorio
 
 ```sh
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
@@ -209,7 +209,7 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
 ```
 
-# ServiceAccount
+## ServiceAccount
 
 ```sh
 vim service-account.yaml
@@ -285,7 +285,7 @@ service:
 helm install helm --namespace devops -f chartmuseum.yaml stable/chartmuseum
 ```
 
-# Populando o repositório
+## Populando o repositório
 
 ```sh
 helm plugin install https://github.com/chartmuseum/helm-push
@@ -301,7 +301,7 @@ helm install staging-backend app/backend --namespace staging
 helm install production-backend app/backend --namespace production
 ```
 
-# Pipeline com Jenkins
+## Pipeline com Jenkins
 
 ```sh
 vim jenkins-pv-pvc.yaml
@@ -352,7 +352,7 @@ Primeiro acesso no jenkins como admin
 printf $(kubectl get secret --namespace devops jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 ```
 
-# Adicionando permissão para o jenkins
+## Adicionando permissão para o jenkins
 
 ```sh
 kubectl create rolebinding sa-devops-role-clusteradmin --clusterrole=cluster-admin --serviceaccount=devops:default --namespace=devops
@@ -364,7 +364,7 @@ kubectl create rolebinding sa-devops-role-clusteradmin-kubesystem --clusterrole=
 kubectl create rolebinding sa-devops-role-clusteradmin-kubesystem --clusterrole=cluster-admin --serviceaccount=devops:default --namespace=production
 ```
 
-# Credenciais no Jenkins
+## Credenciais no Jenkins
 
 Criar a chave ssh
 
@@ -382,21 +382,21 @@ cat id_rsa_jenkins
 # add credentials
 ```
 
-# Criando Multibranch Pipeline
+## Criando Multibranch Pipeline
 
 Novo Job
 
 Configurar o Branch Sources
 Git
 
-# Helm
+## Helm
 
 ```sh
 cd charts/frontend
 helm push . app
 ```
 
-# Make Jenkinsfile
+## Make Jenkinsfile
 
 ```sh
 vim Jenkinsfile
@@ -516,7 +516,7 @@ podTemplate(
 }
 ```
 
-# Ingress
+## Ingress
 
 ```sh
 vim traefik-accounts.yaml
@@ -689,7 +689,7 @@ sudo vim /etc/hosts
 192.168.X.x traefik-ui.minikube
 ```
 
-# Repositorio privado Docker
+## Repositorio privado Docker
 
 Para cada namespace [staging, production] que irá utilizar as imagens privadas
 
@@ -702,10 +702,18 @@ create secret docker-registry registry-secret \
 --docker-email=DOCKER_REGISTRY_EMAIL
 ```
 
-# Pod
+## Pod
 
 ```yaml
 spec:
   imagePullSecrets:
     - name: registry-secret
+```
+
+## Comando para exibir o token e se conecar no master
+
+No node slave é requerido kubelet kubeadm kubectl
+
+```sh
+kubeadm token create --print-join-command
 ```

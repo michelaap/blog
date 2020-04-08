@@ -21,7 +21,7 @@ collections:
           widget: "datetime",
           format: "YYYY-MM-DD hh:mm:ss",
         }
-      - { label: "image", name: "thumbnail", widget: "image" }
+      - { label: "Post Image", name: "image", widget: "image" }
       - {
           label: "Category",
           name: "category",
@@ -34,8 +34,8 @@ collections:
           widget: "select",
           options:
             [
-              { label: "dev", value: "#ffe358" },
-              { label: "inv", value: "#2BDA8E" },
+              { label: "DEV", value: "#ffe358" },
+              { label: "INV", value: "#2BDA8E" },
             ],
         }
       - { label: "Body", name: "body", widget: "markdown" }
