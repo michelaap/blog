@@ -1,12 +1,11 @@
 ---
 title: Cluster Kubernetes
 description: Criando um cluster Kubernetes para aplicações escaláveis
-date: "2020-04-01 23:30:23"
-category: dev
-background: "#ffe358"
+date: '2020-04-01 23:30:23'
 image: /assets/img/k8s.png
+category: dev
+background: '#ffe358'
 ---
-
 ## Linux
 
 ```sh
@@ -28,8 +27,7 @@ sudo usermod -aG docker $USER
 
 ## Kubernetes
 
-kubelet, kubeadm e kubectl precisam se conversar, portanto atente-se para as versões.
-Verifique sempre a documentação!
+kubelet, kubeadm e kubectl precisam se conversar, portanto atente-se para as versões. Verifique sempre a documentação!
 
 ```sh
 sudo su
@@ -141,7 +139,6 @@ metadata:
 data:
   NODE_ENV: staging
 ---
-
 ```
 
 ```sh
@@ -386,8 +383,7 @@ cat id_rsa_jenkins
 
 Novo Job
 
-Configurar o Branch Sources
-Git
+Configurar o Branch Sources Git
 
 ## Helm
 
@@ -691,7 +687,7 @@ sudo vim /etc/hosts
 
 ## Repositorio privado Docker
 
-Para cada namespace [staging, production] que irá utilizar as imagens privadas
+Para cada namespace \[staging, production] que irá utilizar as imagens privadas
 
 ```sh
 kubectl --namespace production \
@@ -717,3 +713,25 @@ No node slave é requerido kubelet kubeadm kubectl
 ```sh
 kubeadm token create --print-join-command
 ```
+
+
+
+Adicionando certificado ssl
+
+```sh
+kubectl -n production create secret tls my-cert --key=cert.key --cert cert.crt
+```
+No chart
+
+```yaml
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true" 
+  hosts:
+    - host: mysite.com
+      paths: ['/']
+  tls:
+  - secretName: my-cert
+``
