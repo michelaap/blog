@@ -756,7 +756,7 @@ Verificar os certificados atualizados
 ```sh
  sudo cat /etc/kubernetes/kubelet.conf
 ```
-A saída do comando executado acima deverá apontar a localização do certificado
+A saída do comando executado acima deverá apontar a localização do certificado conforme demonstrado parcialmente abaixo.
 
 ```yaml
   user:
