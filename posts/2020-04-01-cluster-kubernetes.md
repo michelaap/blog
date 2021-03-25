@@ -714,13 +714,12 @@ No node slave é requerido kubelet kubeadm kubectl
 kubeadm token create --print-join-command
 ```
 
-
-
 Adicionando certificado ssl
 
 ```sh
 kubectl -n production create secret tls my-cert --key=cert.key --cert cert.crt
 ```
+
 No chart
 
 ```yaml
@@ -734,7 +733,7 @@ ingress:
       paths: ['/']
   tls:
   - secretName: my-cert
-``
+```
 
 ## Atualizando todos os certificados
 
@@ -742,7 +741,7 @@ Primerio verificamos a data de expiração dos certificados
 
 ```sh
 sudo kubeadm alpha certs check-expiration
-```
+````
 
 Após a verificação podemos atualizar todos com o comando abaixo
 
