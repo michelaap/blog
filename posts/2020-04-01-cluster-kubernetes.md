@@ -735,3 +735,17 @@ ingress:
   tls:
   - secretName: my-cert
 ``
+
+## Atualizando todos os certificados
+
+Primerio verificamos a data de expiração dos certificados
+
+```sh
+sudo kubeadm alpha certs check-expiration
+```
+
+Após a verificação podemos atualizar todos com o comando abaixo
+
+```sh
+sudo kubeadm alpha certs renew all
+```
