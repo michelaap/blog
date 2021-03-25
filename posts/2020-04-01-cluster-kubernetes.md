@@ -748,3 +748,32 @@ Após a verificação podemos atualizar todos com o comando abaixo
 ```sh
 sudo kubeadm alpha certs renew all
 ```
+
+## Atualizando o certificado no arquivo de configuração
+
+Verificar os certificados atualizados
+
+```sh
+ sudo cat /etc/kubernetes/kubelet.conf
+```
+A saída do comando executado acima deverá apontar a localização do certificado conforme demonstrado parcialmente abaixo.
+
+```yaml
+  user:
+    client-certificate: /var/lib/kubelet/pki/kubelet-client-current.pem
+    client-key: /var/lib/kubelet/pki/kubelet-client-current.pem
+```
+
+Agora precisamos copiar o certificado que foi atualizado
+
+```sh
+sudo base64 -w 0 /var/lib/kubelet/pki/kubelet-client-current.pem
+```
+
+Ao copiar a saída do comando acima devemos atualizar o arquivo de configuração localizado em ~/.kube/config (Alterar os dois certificados client-certificate ou client-certificate-data e o client-key ou client-key-data)
+
+```sh
+vim ~/.kube/config
+```
+
+Tudo feito, agora já temos os certificados atualizados e já podemos utilizar o kubernetes novamente.
