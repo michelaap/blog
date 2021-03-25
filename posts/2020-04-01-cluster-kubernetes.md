@@ -714,7 +714,7 @@ No node slave é requerido kubelet kubeadm kubectl
 kubeadm token create --print-join-command
 ```
 
-Adicionando certificado ssl
+## Importando um Certificado SSL para utilização no Ingress
 
 ```sh
 kubectl -n production create secret tls my-cert --key=cert.key --cert cert.crt
@@ -735,7 +735,7 @@ ingress:
   - secretName: my-cert
 ```
 
-## Atualizando todos os certificados
+## Atualizando os certificados do Kubernetes
 
 Primerio verificamos a data de expiração dos certificados
 
